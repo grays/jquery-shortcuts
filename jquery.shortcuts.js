@@ -1,5 +1,6 @@
 /* 
  * jQuery Shortcuts
+ * http://github.com/ambethia/jquery-shortcuts
  *
  * A very lightweight approach to keyboard shortcuts (hotkeys) with jQuery.
  * 
