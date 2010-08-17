@@ -30,7 +30,7 @@ jQuery.fn.shortcuts = function(keys) {
   var self = this;
   this.pressed = new Array();
 
-  jQuery(document).keydown(function(event) {
+  jQuery(this).keydown(function(event) {
     // Don't fire in text-accepting inputs that we didn't directly bind to
     if (this !== event.target && (/textarea|select/i.test( event.target.nodeName ) || event.target.type === "text")) {
       return;
@@ -38,12 +38,12 @@ jQuery.fn.shortcuts = function(keys) {
     self.pressed.push(event.keyCode);
     for(combo in keys) {
       if (self.compare(keys[combo].keys, self.pressed)) {
-        keys[combo].func();
+        keys[combo].func(event);
       };
     };
   });
 
-  jQuery(document).keyup(function(event) {
+  jQuery(this).keyup(function(event) {
     self.pressed.splice(jQuery.inArray(event.keyCode, self.pressed), 1);
   });
 
