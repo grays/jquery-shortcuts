@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery Shortcuts Demo</title>
+    <script src='http://www.google.com/jsapi'></script>
+    <script type='text/javascript'>
+      //<![CDATA[
+        google.load("jquery", "1.4.2");
+      //]]>
+    </script>
+    <script src="jquery.shortcuts.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).shortcuts({
+        "Q": {
+          keys: [81],
+          desc: "Log Q to the console",
+          func: function() { $('#list').append('<li>You pressed Q</li>'); }
+        },
+        "ALT I": {
+          keys: [18, 73],
+          desc: "Log this key combination to the console",
+          func: function() { $('#list').append('<li>You pressed ALT and I</li>'); }
+        }
+      });
+      $(document).ready(function(){
+        // Little debug console in the corner.
+        $(document).keydown(function(event) {
+          $('#key-code').html(event.keyCode);
+        });
+      });
+    </script>
+    <style type="text/css" media="screen">
+ul{padding-left:0;}li{margin:4px 0;list-style:none;color:#2b3840;font-size:13px;font-family:"Lucdia Grande",arial,sans-serif;text-shadow:0 1px 1px #fff;background-color:#ddeefe;background:-moz-linear-gradient(top,#ddeefe,#bfe0f1);background-image:-webkit-gradient(linear,0% 0,0% 100%,from(#ddeefe),to(#bfe0f1));border:1px solid #acc3ec;border-top-color:#c0d9e9;padding:2px 7px 2px 10px;border-radius:12px;-webkit-border-radius:12px;-moz-border-radius:12px;box-shadow:0 1px 1px #e4edf2;-webkit-box-shadow:0 1px 1px #e4edf2;-moz-box-shadow:0 1px 1px #e4edf2;}#key-code{color:#2b3840;height:32px;width:32px;position:absolute;right:10px;bottom:10px;background-color:#ddeefe;background:-moz-linear-gradient(top,#ddeefe,#bfe0f1);background-image:-webkit-gradient(linear,0% 0,0% 100%,from(#ddeefe),to(#bfe0f1));font-size:16px;text-align:center;line-height:32px;border:1px solid #acc3ec;font-family:Monaco,'Courier New',monospace;box-shadow:1px 1px 2px #666;-webkit-box-shadow:1px 1px 2px #666;-moz-box-shadow:1px 1px 2px #666;}
+    </style>
+  </head>
+  <body>
+    <p>Try pressing <code>Q</code> or <code>ALT-I</code>.</p>
+    <div id="key-code"></div>
+    <ul id="list"></ul>
+    <form action="form_action.php" method="get">
+      <p>Shortcuts shouldn't do anything while either of text boxes have focus.</p>
+      <p>
+        <input type="text">
+      </p>
+      <p>
+        <textarea>
+        </textarea>
+      </p>
+
+    </form>
+    
+  </body>
+</html>

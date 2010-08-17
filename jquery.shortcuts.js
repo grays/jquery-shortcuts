@@ -31,9 +31,13 @@ jQuery.fn.shortcuts = function(keys) {
   this.pressed = new Array();
 
   jQuery(document).keydown(function(event) {
+    // Don't fire in text-accepting inputs that we didn't directly bind to
+    if (this !== event.target && (/textarea|select/i.test( event.target.nodeName ) || event.target.type === "text")) {
+      return;
+    }
     self.pressed.push(event.keyCode);
     for(combo in keys) {
-      if (!self.focused && self.compare(keys[combo].keys, self.pressed)) {
+      if (self.compare(keys[combo].keys, self.pressed)) {
         keys[combo].func();
       };
     };
@@ -42,10 +46,6 @@ jQuery.fn.shortcuts = function(keys) {
   jQuery(document).keyup(function(event) {
     self.pressed.splice(jQuery.inArray(event.keyCode, self.pressed), 1);
   });
-
-  jQuery("input, select, textarea").bind("focus blur", function(event) {
-    self.focused = event.type == "focus";
-  })
 
   this.compare = function(a, b) {
     if (a.length != b.length) return false; a.sort(); b.sort();
